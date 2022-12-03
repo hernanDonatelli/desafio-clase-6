@@ -5,83 +5,33 @@
         <div class="d-flex flex-column">
           <!-- Productos Infusiones -->
           <div class="col-12 mx-auto col-md-10 col-lg-8 col-xl-6">
-            <h3 class="text-center">{{ titulo.infusiones }}</h3>
-            <table class="table" :class="clase.infusiones">
-              <thead>
-                <tr>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Marca</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Stock</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tabla-info
-                  is="tabla-info"
-                  v-for="(infusion, index) in infusiones"
-                  :key="index"
-                  :nombre="infusion.nombre"
-                  :marca="infusion.marca"
-                  :precio="infusion.precio"
-                  :stock="infusion.stock"
-                  :class="infusion.stock ? '' : clase.sinstock"
-                ></tabla-info>
-              </tbody>
-            </table>
+            <table-component
+              :array="infusiones"
+              :title="tituloInfusiones"
+              :clase="classInfusiones"
+            >
+            </table-component>
           </div>
 
           <!-- Productos Chocolates -->
           <div class="col-12 mx-auto col-md-10 col-lg-8 col-xl-6">
-            <h3 class="text-center">{{ titulo.chocolates }}</h3>
-            <table class="table" :class="clase.chocolates">
-              <thead>
-                <tr>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Marca</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Stock</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tabla-info
-                  is="tabla-info"
-                  v-for="(chocolate, index) in chocolates"
-                  :key="index"
-                  :nombre="chocolate.nombre"
-                  :marca="chocolate.marca"
-                  :precio="chocolate.precio"
-                  :stock="chocolate.stock"
-                  :class="chocolate.stock ? 'haystock' : clase.sinstock"
-                ></tabla-info>
-              </tbody>
-            </table>
+            <table-component
+              :array="chocolates"
+              :title="tituloChocolates"
+              :clase="classChocolates"
+            >
+            </table-component>
           </div>
 
           <!-- Productos Leches -->
           <div class="col-12 mx-auto col-md-10 col-lg-8 col-xl-6">
-            <h3 class="text-center" :class="clase.danger">{{ titulo.leches }}</h3>
-            <table class="table" :class="clase.leches">
-              <thead>
-                <tr>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Marca</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Stock</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tabla-info
-                  is="tabla-info"
-                  v-for="(leche, index) in leches"
-                  :key="index"
-                  :nombre="leche.nombre"
-                  :marca="leche.marca"
-                  :precio="leche.precio"
-                  :stock="leche.stock"
-                  :class="leche.stock ? 'haystock' : clase.sinstock"
-                ></tabla-info>
-              </tbody>
-            </table>
+            <table-component
+              :array="leches"
+              :title="tituloLeches"
+              :clase="classLeches"
+              :titleClass="danger"
+            >
+            </table-component>
           </div>
         </div>
       </div>
@@ -90,37 +40,26 @@
 </template>
 
 <script>
-import TablaInfo from "./components/TablaInfo.vue";
+import TableComponent from "./components/TableComponent.vue";
 
 export default {
   name: "App",
   components: {
-    TablaInfo,
+    TableComponent,
   },
   data() {
     return {
-      titulo: {
-        infusiones: "Tabla Infusiones",
-        chocolates: "Tabla Chocolates",
-        leches: "Tabla Leches",
-      },
-      clase: {
-        infusiones: ["text-center", "table-bordered"],
-        chocolates: [
-          "text-center",
-          "table-dark",
-          "table-hover",
-          "table-bordered",
-        ],
-        leches: [
-          "text-center",
-          "table-bordered",
-          "border-danger",
-          "text-danger",
-        ],
-        sinstock: "sinStock",
-        danger: "text-danger"
-      },
+      //Titulos
+      tituloInfusiones: "Tabla Infusiones",
+      tituloChocolates: "Tabla Chocolates",
+      tituloLeches: "Tabla Leches",
+      //Estilos
+      classInfusiones: ["text-center", "table-bordered"],
+      classChocolates: ["text-center", "table-dark", "table-hover", "table-bordered"],
+      classLeches: ["text-center", "table-bordered", "border-danger", "text-danger"],
+      sinstock: "sinStock",
+      danger: "text-danger",
+      //Productos
       infusiones: [
         {
           nombre: "Inti Grey",
